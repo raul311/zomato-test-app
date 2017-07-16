@@ -14,16 +14,11 @@
         android:gravity="left"
         android:layout_margin="10dp">
 
-        <CheckBox
-            android:id="@+id/category_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/category_name"
+        <Button
+            android:id="@+id/category_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/category_id"
+            android:text="@string/button_continue"
             android:textSize="22dp" />
 
     </RelativeLayout>
