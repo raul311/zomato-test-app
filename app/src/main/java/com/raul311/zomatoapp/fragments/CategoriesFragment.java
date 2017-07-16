@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.raul311.zomatoapp.activities.CategoriesActivity;
 import com.raul311.zomatoapp.constants.Constants;
 import com.raul311.zomatoapp.adapters.CategoriesAdapter;
 import com.raul311.zomatoapp.service.ZomatoServiceManager;
@@ -42,6 +43,11 @@ public class CategoriesFragment extends Fragment implements CategoriesAdapter.Ca
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
     private ProgressBar progressBar;
+    private OnFragmentInteractionListener actionListener;
+
+    public interface OnFragmentInteractionListener {
+        void openCuisines(String categories);
+    }
 
     public CategoriesFragment() {
 
@@ -73,11 +79,24 @@ public class CategoriesFragment extends Fragment implements CategoriesAdapter.Ca
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        try {
+            actionListener = (OnFragmentInteractionListener) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(getActivity().toString()
+                    + " must implement OnFragmentInteractionListener.");
+        }
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         progressBar.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
         callRetrofit();
+        //getActivity().setTitle(R.string.title_categories);
     }
 
     private void callRetrofit() {
@@ -116,8 +135,9 @@ public class CategoriesFragment extends Fragment implements CategoriesAdapter.Ca
   */
 
     @Override
-    public void onCategorySelected(Category category) {
+    public void onCategorySelected(String categories) {
         Log.d("main", "onCategorySelected ");
+        actionListener.openCuisines(categories);
     }
 
 }
