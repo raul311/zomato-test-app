@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/cuisine_view"
+    android:id="@+id/restaurant_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="4dp"
@@ -16,10 +16,10 @@
         android:layout_margin="10dp">
 
         <TextView
-            android:id="@+id/cuisine_header"
+            android:id="@+id/restaurant_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title_cuisines"
+            android:text="@string/title_restaurants"
             android:textSize="22dp" />
 
     </RelativeLayout>

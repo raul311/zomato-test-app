@@ -41,7 +41,7 @@ public class CategoriesActivity extends Activity implements CategoriesFragment.O
     @Override
     public void openCuisines(String categories) {
         Log.d("", categories);
-        Intent cuisineIntent = new Intent(this, CuisineActivity.class);
+        Intent cuisineIntent = new Intent(this, CuisinesActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("Categories", categories);
         Intent intent = getIntent();

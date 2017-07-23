@@ -2,5 +2,8 @@
     <string name="app_name">Zomato App</string>
     <string name="title_categories">Categories</string>
     <string name="title_cuisines">Cuisines</string>
+    <string name="title_restaurants">Restaurants</string>
     <string name="button_continue">Continue</string>
+    <string name="address">Address:</string>
+    <string name="locality">Locality:</string>
 </resources>
