@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 import com.raul311.zomatoapp.service.model.Category;
 
 /**
- * @author 311
+ * @author raul311
  */
 public class CategoriesResponse {
 

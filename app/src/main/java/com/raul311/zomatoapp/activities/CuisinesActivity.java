@@ -14,7 +14,7 @@ import com.raul311.zomatoapp.fragments.CuisinesFragment;
  * @author raul311
  */
 
-public class CuisineActivity extends Activity implements CuisinesFragment.OnFragmentInteractionListener {
+public class CuisinesActivity extends Activity implements CuisinesFragment.OnFragmentInteractionListener {
 
     private FragmentManager fragmentManager;
     private double latitud;
@@ -48,6 +48,15 @@ public class CuisineActivity extends Activity implements CuisinesFragment.OnFrag
     @Override
     public void openSearch(String cuisines) {
         Log.d("", categories + cuisines);
+        Bundle extras = new Bundle();
+        extras.putString("cuisines", cuisines);
+        extras.putString("categories", categories);
+        extras.putDouble("latitud", latitud);
+        extras.putDouble("longitud", longitud);
+
+        Intent restaurantsIntent = new Intent(this, RestaurantsActivity.class);
+        restaurantsIntent.putExtras(extras);
+        startActivity(restaurantsIntent);
     }
 
 }
