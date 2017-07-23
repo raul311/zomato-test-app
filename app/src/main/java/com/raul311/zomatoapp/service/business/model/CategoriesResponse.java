@@ -1,10 +1,10 @@
 package com.raul311.zomatoapp.service.business.model;
 
 import java.util.List;
-/*
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-*/
+
 import com.raul311.zomatoapp.service.model.Category;
 
 /**
@@ -12,8 +12,8 @@ import com.raul311.zomatoapp.service.model.Category;
  */
 public class CategoriesResponse {
 
-    //@SerializedName("categories")
-    //@Expose
+    @SerializedName("categories")
+    @Expose
     private List<Category> categories = null;
 
     public List<Category> getCategories() {

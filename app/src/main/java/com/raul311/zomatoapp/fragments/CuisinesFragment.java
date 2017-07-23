@@ -11,10 +11,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.raul311.zomatoapp.constants.Constants;
+import com.raul311.zomatoapp.R;
 import com.raul311.zomatoapp.adapters.CategoriesAdapter;
+import com.raul311.zomatoapp.adapters.CuisinesAdapter;
+import com.raul311.zomatoapp.constants.Constants;
 import com.raul311.zomatoapp.service.ZomatoServiceManager;
 import com.raul311.zomatoapp.service.business.EndpointInterface;
+import com.raul311.zomatoapp.service.business.model.CategoriesResponse;
+import com.raul311.zomatoapp.service.business.model.CuisinesResponse;
+import com.raul311.zomatoapp.service.model.Category;
+import com.raul311.zomatoapp.service.model.Cuisine;
+
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -23,17 +31,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import com.raul311.zomatoapp.R;
-import com.raul311.zomatoapp.service.business.model.CategoriesResponse;
-import com.raul311.zomatoapp.service.model.Category;
-
-import java.util.List;
-
 /**
  * @author raul311
  */
 
-public class CategoriesFragment extends Fragment implements CategoriesAdapter.CategoriesAdapterListener {
+public class CuisinesFragment extends Fragment implements CuisinesAdapter.CuisinesAdapterListener {
 
     public ZomatoServiceManager zomatoServiceManager;
     public Retrofit retrofit;
@@ -43,13 +45,16 @@ public class CategoriesFragment extends Fragment implements CategoriesAdapter.Ca
     private RecyclerView.Adapter adapter;
     private ProgressBar progressBar;
     private OnFragmentInteractionListener actionListener;
+    final private double latitud;
+    final private double longitud;
 
     public interface OnFragmentInteractionListener {
-        void openCuisines(String categories);
+        void openSearch(String cuisines);
     }
 
-    public CategoriesFragment() {
-
+    public CuisinesFragment(double latitud, double longitud) {
+        this.latitud = latitud;
+        this.longitud = longitud;
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         //builder.interceptors().add(interceptor);
         OkHttpClient client = builder.build();
@@ -95,24 +100,23 @@ public class CategoriesFragment extends Fragment implements CategoriesAdapter.Ca
         progressBar.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
         callRetrofit();
-        //getActivity().setTitle(R.string.title_categories);
     }
 
     private void callRetrofit() {
 
-        Call<CategoriesResponse> call = apiService.getCategories();
-        call.enqueue(new Callback<CategoriesResponse>() {
+        Call<CuisinesResponse> call = apiService.getCuisines(latitud, longitud);
+        call.enqueue(new Callback<CuisinesResponse>() {
             @Override
-            public void onResponse(Call<CategoriesResponse> call, Response<CategoriesResponse> response) {
+            public void onResponse(Call<CuisinesResponse> call, Response<CuisinesResponse> response) {
                 progressBar.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
                 int statusCode = response.code();
-                CategoriesResponse categoriesResponse = response.body();
-                updateAdapter(categoriesResponse.getCategories());
+                CuisinesResponse cuisinesResponse = response.body();
+                updateAdapter(cuisinesResponse.getCuisines());
             }
 
             @Override
-            public void onFailure(Call<CategoriesResponse> call, Throwable t) {
+            public void onFailure(Call<CuisinesResponse> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
                 Log.d("main", "onFailure: ");
@@ -121,22 +125,15 @@ public class CategoriesFragment extends Fragment implements CategoriesAdapter.Ca
 
     }
 
-    private void updateAdapter(List<Category> categoryList) {
-        adapter = new CategoriesAdapter(getActivity(), categoryList, this);
+    private void updateAdapter(List<Cuisine> cuisineList) {
+        adapter = new CuisinesAdapter(getActivity(), cuisineList, this);
         recyclerView.setAdapter(adapter);
     }
-/*
-    public void onCategorySelected(Category category) {
-        Intent intent = new Intent(getActivity(), DetailActivity.class);
-        intent.putExtra(FragmentConstants.ADVERTISEMENT_SENT, ad);
-        startActivity(intent);
-    }
-  */
 
     @Override
-    public void onCategorySelected(String categories) {
+    public void onCuisineSelected(String cuisines) {
         Log.d("main", "onCategorySelected ");
-        actionListener.openCuisines(categories);
+        actionListener.openSearch(cuisines);
     }
 
 }
