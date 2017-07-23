@@ -73,6 +73,10 @@ public class MainActivity extends Activity implements MainActivityFragment.OnFra
         Intent categoriesIntent = new Intent(this, CategoriesActivity.class);
         Log.d("", longitud + " ");
         Log.d("", latitud + " ");
+        Bundle bundle = new Bundle();
+        bundle.putDouble("latitud", latitud < 1 ? 28.5383355 : latitud);
+        bundle.putDouble("longitud", longitud < 1 ? -81.3792365 : longitud);
+        categoriesIntent.putExtras(bundle);
         startActivity(categoriesIntent);
     }
 

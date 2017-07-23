@@ -1,19 +1,19 @@
 package com.raul311.zomatoapp.service.model;
 
-//import com.google.gson.annotations.Expose;
-//import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * @author raul311
  */
 public class CategoryDetails {
 
-    //    @SerializedName("id")
-    //  @Expose
+    @SerializedName("id")
+    @Expose
     private Integer id;
 
-    //@SerializedName("name")
-    //@Expose
+    @SerializedName("name")
+    @Expose
     private String name;
 
     public Integer getId() {

@@ -1,7 +1,7 @@
 package com.raul311.zomatoapp.service.model;
 
-//import com.google.gson.annotations.Expose;
-//import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * @author raul311
@@ -9,8 +9,8 @@ package com.raul311.zomatoapp.service.model;
 
 public class Category {
 
-    //    @SerializedName("categories")
-//    @Expose
+    @SerializedName("categories")
+    @Expose
     private CategoryDetails categories;
 
     public CategoryDetails getCategories() {

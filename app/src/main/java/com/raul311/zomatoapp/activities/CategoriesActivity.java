@@ -2,6 +2,7 @@ package com.raul311.zomatoapp.activities;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -40,6 +41,14 @@ public class CategoriesActivity extends Activity implements CategoriesFragment.O
     @Override
     public void openCuisines(String categories) {
         Log.d("", categories);
+        Intent cuisineIntent = new Intent(this, CuisineActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("Categories", categories);
+        Intent intent = getIntent();
+        bundle.putDouble("latitud", intent.getDoubleExtra("latitud", 0));
+        bundle.putDouble("longitud", intent.getDoubleExtra("longitud", 0));
+        cuisineIntent.putExtras(bundle);
+        startActivity(cuisineIntent);
     }
 
 }
